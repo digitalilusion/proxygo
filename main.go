@@ -31,6 +31,7 @@ func rootHandler(w http.ResponseWriter, r *http.Request) {
     w.Write([]byte(err.Error()))
     return
   }
+  w.Header().Set("Content-type", "text/html")
   w.Write(data)
 
 }
