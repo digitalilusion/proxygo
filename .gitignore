@@ -14,3 +14,4 @@
 .glide/
 
 proxygo
+_cache/**
