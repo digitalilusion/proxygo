@@ -38,8 +38,15 @@ func processLink(n *html.Node, r *ParseResult, host *string) {
 	if attr != nil {
 		if kind == "a" {
 			if (!strings.HasPrefix(attr.Val, "//")) && strings.HasPrefix(attr.Val, "/") {
-				attr.Val = *host + attr.Val
-				log.Printf("Redirect to: %s", attr.Val)
+				attr.Val = "http://" + *host + attr.Val
+			}
+		} else if kind == "link" || kind == "img" || kind == "script" {
+			if !(strings.HasPrefix(attr.Val, "http://") || strings.HasPrefix(attr.Val, "https://") || strings.HasPrefix(attr.Val, "//")) {
+				sep := ""
+				if !strings.HasPrefix(attr.Val, "/") {
+					sep = "/"
+				}
+				attr.Val = "/" + *host + sep + attr.Val
 			}
 		}
 	}
