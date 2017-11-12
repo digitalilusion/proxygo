@@ -47,6 +47,7 @@ func rootHandler(w http.ResponseWriter, r *http.Request) {
 					for _, k := range injections {
 						k.Parent = nil
 						k.NextSibling = nil
+						k.PrevSibling = nil
 						n.AppendChild(k)
 						//log.Print(k)
 					}
